@@ -290,6 +290,10 @@ def render_report(report, out=sys.stderr):
 
 
 def main():
+    # No Windows o terminal pode não estar em UTF-8; sem isso, acento e emoji quebram.
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Tira a marca de máquina de um rascunho.")
     ap.add_argument("input", nargs="?", default="-", help="arquivo, ou - pra stdin")
     ap.add_argument("-o", "--out", help="grava o texto limpo aqui em vez de imprimir")

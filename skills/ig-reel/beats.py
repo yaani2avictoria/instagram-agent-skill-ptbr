@@ -220,6 +220,10 @@ def render(a, out=sys.stdout):
 
 
 def main():
+    # No Windows o terminal pode não estar em UTF-8; sem isso, acento e emoji quebram.
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Cronometra um roteiro de Reel em batidas.")
     ap.add_argument("input", nargs="?", default="-", help="arquivo do roteiro, ou - pra stdin")
     ap.add_argument("--wpm", type=float, default=150,

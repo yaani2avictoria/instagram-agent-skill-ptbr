@@ -222,6 +222,10 @@ def to_markdown(a):
 
 
 def main():
+    # No Windows o terminal pode não estar em UTF-8; sem isso, acento e emoji quebram.
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Ranqueia reels coletados pelo múltiplo sobre a própria conta.")
     ap.add_argument("input", nargs="?", default="-", help="arquivo TSV, ou - pra stdin")
     ap.add_argument("--hooks", default=HOOKS, help="caminho do ig-reel/hooks.json")

@@ -340,6 +340,10 @@ def render_table(rows, out=sys.stdout):
 
 
 def main():
+    # No Windows o terminal pode não estar em UTF-8; sem isso, acento e emoji quebram.
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description="Dá nota a ganchos de Reels em cinco propriedades.")
     ap.add_argument("input", nargs="?", default="-", help="arquivo com um gancho por linha, ou -")
     ap.add_argument("--hook", help="avalia um único gancho passado na linha de comando")
