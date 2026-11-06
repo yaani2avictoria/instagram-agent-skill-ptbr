@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "instagram-agent-skill-ptbr",
+  "description": "As skills de Instagram para o Claude, em português do Brasil",
+  "owner": {
+    "name": "yaani2avictoria"
+  },
+  "plugins": [
+    {
+      "name": "instagram-agent-ptbr",
+      "description": "Treze skills do Claude para Instagram em português do Brasil, com nota de gancho, revisão de legenda e humanizador.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/yaani2avictoria/instagram-agent-skill-ptbr"
+    }
+  ]
+}
